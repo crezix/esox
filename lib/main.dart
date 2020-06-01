@@ -53,11 +53,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  AddNotes addNotes = new AddNotes();
   static ShowNotes showNotes = new ShowNotes(notes:notes);
-  static List notes=[];
+  static List notes;
 
   Future<Null> getNotes()async {
+    notes=[];
     DataSnapshot snapshot= await FirebaseDatabase.instance.reference().child('notes').once();
       Map <dynamic, dynamic> values = snapshot.value;
       values.forEach((key, value) { 
@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute<void>(builder: (context) => addNotes)
+                  MaterialPageRoute<void>(builder: (context) => AddNotes().createState().build(context))
                 );
               },
             )

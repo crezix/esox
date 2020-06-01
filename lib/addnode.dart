@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 
 class AddNotes extends StatefulWidget{
@@ -12,32 +10,21 @@ class AddNotes extends StatefulWidget{
 }
 
 class _AddNotesState extends State<AddNotes>{
+  final GlobalKey<ScaffoldState> addNoteSKey= new GlobalKey<ScaffoldState>();
   DatabaseReference addNoteRef;
   String note='';
   Future<Null> createNote() async {
-    print(note);
-    note!=''?addNoteRef.push().set(<String, String>{
-      'note':note
-    }).then((_){Scaffold.of(context).showSnackBar(SnackBar(content: Text('Note Added!')));}):
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text('Empty Note'),));
-  }
-
-  @override
-  void initState() {
-    super.initState();
     addNoteRef = FirebaseDatabase.instance.reference().child('notes');
-    addNoteRef.once().then((DataSnapshot snapshot) {
-      Map <dynamic, dynamic> values = snapshot.value;
-      values.forEach((key, value) { 
-        print(value);
-      });
+    print(note);
+    addNoteRef.push().set(<String, String>{
+      'note':note
     });
-    //var a = FirebaseDatabase.instance.app.name;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: addNoteSKey,
       appBar: AppBar(
         title: Text('ESOX'),
         centerTitle: true,
@@ -46,7 +33,10 @@ class _AddNotesState extends State<AddNotes>{
         child: ListView(
         children: <Widget>[
           SizedBox(height: 200,),
-          TextField(
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: 'Add Your Note Here',
+            ),
             keyboardType: TextInputType.multiline,
             maxLines: null,
             onChanged: (val){
@@ -58,8 +48,9 @@ class _AddNotesState extends State<AddNotes>{
           RaisedButton(
             child: Text('Add Note'),
             onPressed: ()async {
-             // print(FirebaseDatabase.instance.c);
-            await createNote();
+            createNote().then((value) => 
+            {addNoteSKey.currentState.showSnackBar(SnackBar(content: Text('Note Added')))}
+            );
           },)
         ],
       ),
