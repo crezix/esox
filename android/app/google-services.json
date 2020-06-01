@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "697768312738",
+    "firebase_url": "https://esox-3a3f0.firebaseio.com",
+    "project_id": "esox-3a3f0",
+    "storage_bucket": "esox-3a3f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697768312738:android:35998aca9e180eb2647cfb",
+        "android_client_info": {
+          "package_name": "com.example.esox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697768312738-lt87vcbto2oqbv9os4vcte19ka8rd4ur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnpkQ5NMtAElGQg6DND2u_O3AsCBIfI00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697768312738-lt87vcbto2oqbv9os4vcte19ka8rd4ur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
